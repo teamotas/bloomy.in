@@ -5,10 +5,11 @@
     // $password = "G~+21kO=H2y3";
     // $adminurl="https://bloomyschools.in/admin/"; // While online the site please blank the site variable
     // $db = "makoonsvigyanvihar";
+
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $adminurl="http://localhost/bloom/admin/"; // While online the site please blank the site variable
+    $adminurl="http://localhost/bloomy.in/admin/"; // While online the site please blank the site variable
     $db = "bloomy";
 
     // Create connection

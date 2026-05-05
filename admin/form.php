@@ -1,5 +1,5 @@
 <?php
-include_once('db.php');
+include_once('config.php');
 ob_start();
 
 //1st form without mail (top)

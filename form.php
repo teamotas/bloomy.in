@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require 'config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $response = $_POST['g-recaptcha-response'];
 
-    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LdlEf0rAAAAAEC9ykgsw-WQWZ523c4hSjz_T-LF&response=".$response);
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6Le36dksAAAAAA5ZiMDtgJq5bOcGkgWaP9iKoJ_Y&response=".$response);
     $captcha_success = json_decode($verify);
 
     if (!$captcha_success || !$captcha_success->success) {
