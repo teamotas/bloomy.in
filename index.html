@@ -37,7 +37,8 @@
     <link rel="stylesheet" href="assets/css/slick.min.css">
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lekf7osAAAAANigDrBXPigXvIHu3E0vtnVl8Gd6"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js?render=6Lekf7osAAAAANigDrBXPigXvIHu3E0vtnVl8Gd6"></script> -->
 
 </head>
 <body>
@@ -231,17 +232,24 @@
 						
 						<form action="form.php" method="post">
                             <input type="text" class="w-100 form-control py-3 mb-2 border-primary" placeholder="Your Name"
-                                name="txtname" required>
-                            <input type="number" class="w-100 form-control py-3 mb-2 border-primary"
-                                placeholder="Enter Your Mobile Number" pattern="[0-9]{10}" maxlength="10" name="txtmobile"
+                                name="name" required>
+                            <input type="tel" class="w-100 form-control py-3 mb-2 border-primary"
+                                placeholder="Enter Your Mobile Number" pattern="[0-9]{10}" name="mobile"
                                 required>
                             <input type="email" class="w-100 form-control py-3 mb-2 border-primary"
-                                placeholder="Enter Your Email" name="txtemail" required>
+                                placeholder="Enter Your Email" name="email" required>
                             <textarea class="w-100 form-control mb-2 border-primary" rows="8" cols="10" name="comments"
                                 placeholder="Your Message"></textarea>
                             
                             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" >
-                            <button type="submit" class="vs-btn wave-btn btn-white">Submit</button>
+                            <!-- <button type="submit" class="vs-btn wave-btn btn-white">Submit</button> -->
+                            <button
+                                class="vs-btn wave-btn btn-white g-recaptcha"
+                                data-sitekey="6LdlEf0rAAAAAE3VLb3ipKPgJmc8pjs_DjgyKN_W"
+                                data-callback="onSubmit"
+                                onclick="window._activeForm = this.form">
+                                Submit
+                            </button>
                                 
                         </form>
                     </div>
@@ -837,13 +845,19 @@
 	******************************** -->
 
     <div class="button-bootm">
-        <a href="#contact"><img src="assets/img/adm.gif" id="showPopupButton"></a>
+        <a href="javascript:void(0)" onclick="openFormPopup()"><img src="assets/img/adm.gif" id="showPopupButton"></a>
         <!-- <img src="assets/images/call.gif"> -->
     </div>
 
     <div class="w-button-bootm">
         <a href="https://wa.me/9810865370" target="_blank"><img src="assets/img/w.gif"></a>
         <!-- <img src="assets/images/call.gif"> -->
+    </div>
+    
+    <div class="call-button-bootm">
+        <a href="tel:+919810865370">
+            <img src="assets/img4/call.png">
+        </a>
     </div>
 
     <!-- Scroll To Top -->
@@ -877,12 +891,71 @@
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
 
+    <div id="formPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+    
+        <div style="background:#fff; max-width:420px; margin:8% auto; padding:25px; border-radius:10px; position:relative;" class="about-form-box bg-theme">
+            
+            <span onclick="closeFormPopup()" style="position:absolute; right:15px; top:10px; font-size:22px; cursor:pointer;">×</span>
+
+            <h3 class="form-title">Quick Enquiry</h3>
+
+            <form action="form.php" method="post" class="">
+
+                <input type="text" class="w-100 form-control py-3 mb-2 border-primary"
+                    placeholder="Your Name" name="name" required>
+
+                <input type="tel" class="w-100 form-control py-3 mb-2 border-primary"
+                    placeholder="Enter Your Mobile Number" name="mobile" maxlength="10" required>
+
+                <input type="email" class="w-100 form-control py-3 mb-2 border-primary"
+                    placeholder="Enter Your Email" name="email" required>
+
+                <textarea class="w-100 form-control mb-2 border-primary"
+                    rows="5" name="comments" placeholder="Your Message"></textarea>
+
+                <input type="hidden" id="g-recaptcha-response-popup" name="g-recaptcha-response">
+
+                <!-- <button type="submit" class="vs-btn wave-btn btn-white">Submit</button> -->
+                <button
+                    class="vs-btn wave-btn btn-white g-recaptcha"
+                    data-sitekey="6LdlEf0rAAAAAE3VLb3ipKPgJmc8pjs_DjgyKN_W"
+                    data-callback="onSubmit"
+                    onclick="window._activeForm = this.form">
+                    Submit
+                </button>
+
+            </form>
+        </div>
+    </div>
+
     <script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('6Lekf7osAAAAANigDrBXPigXvIHu3E0vtnVl8Gd6', {action: 'submit'}).then(function(token) {
-            document.getElementById('g-recaptcha-response').value = token;
-        });
-    });
+        // open
+        function openFormPopup() {
+            document.getElementById("formPopup").style.display = "block";
+        }
+
+        // close
+        function closeFormPopup() {
+            document.getElementById("formPopup").style.display = "none";
+        }
+
+        // AUTO TRIGGER AFTER 6 SECONDS
+        setTimeout(function () {
+            openFormPopup();
+        }, 6000);
+    </script>
+
+    <script>
+        function onSubmit(token) {
+            if (window._activeForm) {
+                window._activeForm.submit();
+            }
+        }
+
+        function handleCaptchaSubmit(form) {
+            window._activeForm = form;
+            return true; // IMPORTANT → allow Google to handle captcha
+        }
     </script>
 </body>
 </html>

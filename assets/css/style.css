@@ -12950,6 +12950,18 @@ span.select2-selection.select2-selection--single:focus {
 .w-button-bootm img {
   width: 100px;
 }
+.call-button-bootm {
+  position: fixed;
+  bottom: 130px; /* 👈 above WhatsApp */
+  left: 20px;
+  padding: 20px;
+  text-align: left;
+  z-index: 999;
+}
+
+.call-button-bootm img {
+  width: 65px;
+}
 
 
 .feature-box{
